@@ -1,0 +1,57 @@
+1. What is Jenkins?
+    Jenkins = Automation server (open source).
+    Core use: Automating CI/CD pipelines.
+             CI → Continuous Integration (merge & test code regularly).
+             CD → Continuous Delivery/Deployment (automatically deploy apps).
+        
+    Jenkins does tasks like:
+        Pull code from GitHub
+        Run tests automatically
+        Build Docker images
+        Deploy to servers
+        Send notifications
+
+2. Jenkins Architecture
+
+Understanding the structure is crucial:
+
+🏗️ Jenkins Core Components
+
+i. Jenkins Master (Controller)
+    The “brain” of Jenkins.
+    Responsibilities:
+        -Scheduling jobs.
+        -Distributing builds to agents.
+        -Monitoring builds.
+        -Storing configuration.
+
+ii. Jenkins Agent (Slave/Worker Node)
+    Executes the jobs assigned by the master.
+    Useful when you need different environments (Linux, Windows, etc.).
+
+iii. Jenkins Plugins
+    Jenkins by itself is lightweight.
+    Functionality is extended by plugins (Git, Docker, Slack, Kubernetes, etc.).
+
+3. Installing Jenkins
+
+You can install Jenkins in 3 main ways:
+
+i. Direct install:
+    Linux (Ubuntu/Debian):
+        sudo apt install openjdk-11-jdk -y
+        sudo apt update
+        wget -q -O - https://pkg.jenkins.io/debian/jenkins.io.key | sudo apt-key add -
+        sudo sh -c 'echo deb http://pkg.jenkins.io/debian-stable binary/ > /etc/apt/sources.list.d/jenkins.list'
+        sudo apt update
+        sudo apt install jenkins -y
+
+    Then start with sudo systemctl start jenkins.
+
+ii. Docker (recommended for practice):
+
+        docker run -d -p 8080:8080 -p 50000:50000 jenkins/jenkins:lts
+        Access: http://localhost:8080
+
+iii. Windows:
+        Download ".msi" installer from jenkins.io
