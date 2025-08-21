@@ -40,7 +40,7 @@ Why better?
     Jenkins downloads (clones) the source code into this directory.
 
 Path:
-    /var/lib/jenkins/workspace/<JOB_NAME>
+     /var/lib/jenkins/workspace/<JOB_NAME>
 
     (Linux, default install).
 On agents: Each agent also has its own workspace path.
