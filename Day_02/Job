@@ -91,7 +91,7 @@ ii. Cron (Build Periodically)
 
     H (hash) → Jenkins spreads builds randomly to avoid overloading server.
 
-ii. SCM Polling
+iii. SCM Polling
     Jenkins checks your source repo (e.g., GitHub) at a set interval.
     Example: check for changes every 2 minutes:
              H/2 * * * *

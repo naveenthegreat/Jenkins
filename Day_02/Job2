@@ -1,0 +1,55 @@
+1.3 Triggers (3 ways)
+
+i.   Manual: “Build Now”.
+ii.  Cron (Build periodically): H/5 * * * * (every ~5 mins, spread with H).
+iii. SCM polling (checks for changes): H/2 * * * *.
+
+- Webhooks (recommended): instant build on push (GitHub/ GitLab). Steps below.
+
+# How to Build automatically when pushed on github
+
+Step 1: Check Jenkins build trigger
+    Go to your job → Configure → Build Triggers.
+    Make sure you ticked:
+        GitHub hook trigger for GITScm polling.
+
+Step 2: Confirm webhook in GitHub
+    Repo → Settings → Webhooks.
+    Make sure the URL is:
+        http://<publicly-accessible-jenkins>/github-webhook/
+
+    In Recent Deliveries, check if GitHub says ✅ “200 OK” or ❌ “failed”.
+    (I’m guessing yours will show failed because 10.0.2.15 isn’t public).
+
+Step 3: Make Jenkins reachable from GitHub
+
+You have two options:
+
+🔹 Option A: Quick local test (without internet)
+Instead of using webhook, use Poll SCM:
+
+i.  In Jenkins job → Configure → Build Triggers → Poll SCM.
+ii. Enter schedule:
+                    * * * * *
+            (This means Jenkins checks every 1 minute for GitHub changes).
+
+iii. Save.
+iv.  Now, whenever you push a commit to GitHub → Jenkins will detect it within 1 min and build.
+
+        ⚡ Works without exposing your Jenkins to GitHub. (Good for your VM test!)
+
+
+🔹 Option B: Real Webhook with GitHub
+
+If you want instant builds from GitHub webhook:
+
+i. Install ngrok inside your VM or host machine.
+        ngrok http 8080
+
+ii. It will give a public URL like:
+        https://random123.ngrok.io
+
+iii. Use this in GitHub webhook:
+        https://random123.ngrok.io/github-webhook/
+
+Now GitHub can reach Jenkins instantly 🚀.
